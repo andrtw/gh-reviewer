@@ -1,35 +1,17 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env python3
 
-echo "Hello gh-reviewer!"
+from dependencies import check_dependencies
 
-# Snippets to help get started:
 
-# Determine if an executable is in the PATH
-# if ! type -p ruby >/dev/null; then
-#   echo "Ruby not found on the system" >&2
-#   exit 1
-# fi
+def main():
+    missing = check_dependencies()
+    if missing:
+        missing = ", ".join(missing)
+        print(
+            f"Error: ensure the following dependencies are installed and configured. {missing}"
+        )
+        return
 
-# Pass arguments through to another command
-# gh issue list "$@" -R cli/cli
 
-# Using the gh api command to retrieve and format information
-# QUERY='
-#   query($endCursor: String) {
-#     viewer {
-#       repositories(first: 100, after: $endCursor) {
-#         nodes {
-#           nameWithOwner
-#           stargazerCount
-#         }
-#       }
-#     }
-#   }
-# '
-# TEMPLATE='
-#   {{- range $repo := .data.viewer.repositories.nodes -}}
-#     {{- printf "name: %s - stargazers: %v\n" $repo.nameWithOwner $repo.stargazerCount -}}
-#   {{- end -}}
-# '
-# exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}"
+if __name__ == "__main__":
+    main()
