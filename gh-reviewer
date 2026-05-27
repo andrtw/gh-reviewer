@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import args
 from dependencies import check_dependencies
 
 
@@ -11,6 +12,7 @@ def main():
             f"Error: ensure the following dependencies are installed and configured. {missing}"
         )
         return
+    args.setup_argparse()
 
 
 if __name__ == "__main__":
