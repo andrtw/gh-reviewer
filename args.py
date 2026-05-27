@@ -1,6 +1,7 @@
 import argparse
 
 import update_reviewer
+from utils import logger
 
 
 def setup_argparse():
@@ -13,6 +14,7 @@ def setup_argparse():
     __add_remove_reviewer_parser(subparsers)
 
     args = parser.parse_args()
+    logger.debug(args)
     args.func(args)
 
 
