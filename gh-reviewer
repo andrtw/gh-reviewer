@@ -9,7 +9,7 @@ def main():
     if missing:
         missing = ", ".join(missing)
         print(
-            f"Error: ensure the following dependencies are installed and configured. {missing}"
+            f"Ensure the following dependencies are installed and configured: {missing}"
         )
         return
     args.setup_argparse()
