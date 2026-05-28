@@ -2,7 +2,7 @@ import subprocess
 from argparse import Namespace
 from typing import Callable
 
-from utils import gh, logger
+from utils import gh, git, logger
 
 GH_ADD_REVIEWER_FLAG = "--add-reviewer"
 GH_REMOVE_REVIEWER_FLAG = "--remove-reviewer"
@@ -23,6 +23,10 @@ def rm_reviewer(args: Namespace):
 
 
 def __update_reviewer(args: Namespace, updater: Callable[[str, str], None]):
+    if not git.is_git_repo():
+        print("Not a git repository")
+        return
+
     members = __get_members()
     logger.debug(f"Got {len(members)} members")
     if not members:
