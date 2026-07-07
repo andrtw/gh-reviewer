@@ -12,10 +12,13 @@ def api_paginated(url: str) -> list[Any]:
         ["gh", "api", "--paginate", url],
         stdout=subprocess.PIPE,
     )
-    body = json.loads(res.stdout.decode())
+    body = res.stdout.decode()
     if res.returncode != 0:
-        raise ApiError(body)
-    return body
+        try:
+            raise ApiError(json.loads(body))
+        except json.JSONDecodeError:
+            raise ApiError(body)
+    return json.loads(body)
 
 
 def edit_pr(*args: str):
