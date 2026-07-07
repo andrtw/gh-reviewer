@@ -22,6 +22,14 @@ def rm_reviewer(args: Namespace):
     )
 
 
+def print_reviewer(_: Namespace):
+    members = __get_members()
+    selected = __fzf_members(members)
+    if not selected:
+        return
+    print("\n".join(selected))
+
+
 def __update_reviewer(args: Namespace, updater: Callable[[str, str], None]):
     if not git.is_git_repo():
         print("Not a git repository")

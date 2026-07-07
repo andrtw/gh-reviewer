@@ -12,6 +12,7 @@ def setup_argparse():
 
     __add_add_reviewer_parser(subparsers)
     __add_remove_reviewer_parser(subparsers)
+    __add_print_parser(subparsers)
 
     args = parser.parse_args()
     logger.debug(args)
@@ -42,3 +43,11 @@ def __add_remove_reviewer_parser(subparsers: argparse._SubParsersAction):
         help="pull request number. If empty, the reviewer(s) are removed from the pull request that belongs to the current branch",
     )
     rm_subparser.set_defaults(func=update_reviewer.rm_reviewer)
+
+
+def __add_print_parser(subparsers: argparse._SubParsersAction):
+    print_subparser = subparsers.add_parser(
+        "print",
+        help="prints the selection to standard output",
+    )
+    print_subparser.set_defaults(func=update_reviewer.print_reviewer)
