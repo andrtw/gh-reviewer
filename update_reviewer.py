@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from argparse import Namespace
 from typing import Callable
 
@@ -26,7 +27,7 @@ def print_reviewer(_: Namespace):
     members = __get_members()
     selected = __fzf_members(members)
     if not selected:
-        return
+        sys.exit(1)
     print("\n".join(selected))
 
 
