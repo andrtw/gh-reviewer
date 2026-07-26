@@ -8,7 +8,7 @@ A [GitHub CLI](https://cli.github.com/) extension for fuzzy finding and updating
 gh extension install andrtw/gh-reviewer
 ```
 
-To upgrade to the latest version later on:
+To upgrade to the latest version:
 
 ```sh
 gh extension upgrade gh-reviewer
